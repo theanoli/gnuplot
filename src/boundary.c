@@ -1424,8 +1424,13 @@ do_key_sample_point(
 				this_plot->lp_properties.p_char);
 		apply_pm3dcolor(&(this_plot->lp_properties.pm3d_color));
 	    } else {
-		(*t->point) (xl + key_point_offset, yl, 
-				this_plot->lp_properties.p_type);
+			if (this_plot->lp_properties.p_type == PT_VARIABLE) {
+				(*t->point)(xl + key_point_offset, yl, 
+						this_plot->points[0].CRD_PTTYPE - 1);
+			} else {
+				(*t->point) (xl + key_point_offset, yl, 
+						this_plot->lp_properties.p_type);
+			}
 	    }
 	}
 
